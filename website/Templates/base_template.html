@@ -46,11 +46,12 @@
         <div class="main-menu">
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
-            <li class="active"><a href="index.html"> <i class="icon-home"></i>Home</a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Management</a>
+            <li class="{% block active %}{% endblock %}"><a href="index.html"> <i class="icon-home"></i>Home</a></li>
+            <li class="{% block active2 %}{% endblock %}"><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Management</a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="d1config.html"> <i class="icon-form"></i>Day 1 Configuration</a></li>
-                <li><a href="commandLine.html"> <i class="icon-form"></i>Command line</a></li>
+                <li><a href="template_file.html"> <i class="icon-list"></i>Template file</a></li>
+                <li><a href="commandLine.html"> <i class="icon-screen"></i>Command line</a></li>
               </ul>
             </li>
           </ul>

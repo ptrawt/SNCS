@@ -1730,14 +1730,14 @@ STYLE SWITCHER FOR DEMO
 
 .btn-primary {
   color: color-yiq(#33b35a);
-  background-color: #33b35a;
-  border-color: #33b35a;
+  background-color: #ff5523;
+  border-color: #ff5523;
 }
 
 .btn-primary:hover {
   color: color-yiq(#2b954b);
-  background-color: #2b954b;
-  border-color: #288b46;
+  background-color: #f05423;
+  border-color: #f05423;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -1753,8 +1753,8 @@ STYLE SWITCHER FOR DEMO
 .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: color-yiq(#288b46);
-  background-color: #288b46;
-  border-color: #258141;
+  background-color: #dd5622;
+  border-color: #dd5622;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(51, 179, 90, 0.5);
   box-shadow: 0 0 0 0.2rem rgba(51, 179, 90, 0.5);
 }
@@ -1974,6 +1974,12 @@ STYLE SWITCHER FOR DEMO
   border-color: #171a1d;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+.btn-blue {
+  color: color-yiq(#0080ff);
+  background-color: #0080ff;
+  border-color: #0080ff;
 }
 
 .btn-default {
@@ -2866,7 +2872,7 @@ a > code {
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: .5rem;
 }
 
 .card-title {
@@ -2883,7 +2889,7 @@ a > code {
 
 .card-header {
   padding: 1rem 1.25rem;
-  background-color: #fff;
+  background-color: #e9ecef;
   border-bottom: 1px solid #eee;
 }
 
