@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% extends 'base_template.html' %}
+
+    {% block active2 %}
+        active
+    {% endblock %}
+
+    {% block content %}
+        <!-- Breadcrumb-->
+        <div class="breadcrumb-holder">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Management</a></li>
+                    <li class="breadcrumb-item active">Template file</li>
+                </ul>
+            </div>
+        </div>
+
+    <section class="forms">
+        <div class="container-fluid">
+          <!-- Page Header-->
+          <header>
+            <h1 class="h3 display">Template file</h1>
+          </header>
+          <div class="container">
+              <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">New template file</button>
+              <div id="demo" class="collapse">
+                <div class="form-group">
+                  <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                      <h4></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                          <label class="col-sm-2">Devices</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              <option>option 1</option>
+                              <option>option 2</option>
+                              <option>option 3</option>
+                              <option>option 4</option>
+                            </select>
+                          </div>
+                          <label class="col-sm-2">Model device</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              <option>option 1</option>
+                              <option>option 2</option>
+                              <option>option 3</option>
+                              <option>option 4</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-2 form-control-label">Description</label>
+                          <div class="col-md-9">
+                            <textarea id="text-area-2" class="form-control" rows="7" placeholder="Placeholder text."></textarea>
+                          </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-2 form-control-label">Choose file</label>
+                          <input type="file" name="myFile"><br><br>
+                        </div>
+                        <div class="line"></div>
+                        <div class="col-sm-4 offset-sm-5">
+                            <button type="submit" class="btn btn-blue">Add template file</button>
+                            <a href="index.html"><button type="submit" class="btn btn-secondary">Cancel</button></a>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div><br><br>
+          <div class="row">
+              <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>File</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>File name</th>
+                          <th>Create Date</th>
+                          <th>Description</th>
+                          <th>Devices</th>
+                          <th>Model</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>basic config</td>
+                          <td>29/8/61</td>
+                          <td>basic config for switch 2960 dscsdversdcccccccccccccccccccccccccccccc</td>
+                          <td>switch</td>
+                          <td>c2960</td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-success">Download</button></a></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-blue">Upload</button></a></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                          <td>xxx</td>
+                          <td></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-success">Download</button></a></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-blue">Upload</button></a></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>@twitter</td>
+                          <td>xxx</td>
+                          <td></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-success">Download</button></a></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-blue">Upload</button></a></td>
+                          <td><a href="d1config.html"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    {% endblock %}
