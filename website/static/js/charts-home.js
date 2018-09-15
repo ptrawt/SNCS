@@ -86,7 +86,7 @@ $(document).ready(function () {
             ],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [300, 50, 100],    // รอ database
                     borderWidth: [1, 1, 1],
                     backgroundColor: [
                         brandPrimary,

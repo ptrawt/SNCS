@@ -40,21 +40,20 @@
             <h2 class="h5">AIT</h2>
           </div>
           <!-- Small Brand information, appears on minimized sidebar-->
-          <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>A</strong><strong class="text-primary">IT</strong></a></div>
+          <div class="sidenav-header-logo"><a href="index" class="brand-small text-center"> <strong>A</strong><strong class="text-primary">IT</strong></a></div>
         </div>
         <!-- Sidebar Navigation Menus-->
         <div class="main-menu">
           <h5 class="sidenav-heading">Main</h5>
-          <ul id="side-main-menu" class="side-menu list-unstyled">                  
-            <li class="{% block active %}{% endblock %}"><a href="index.html"> <i class="icon-home"></i>Home</a></li>
-            <li class="{% block active2 %}{% endblock %}"><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Management</a>
-              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="d1config.html"> <i class="icon-form"></i>Day 1 Configuration</a></li>
-                <li><a href="template_file.html"> <i class="icon-list"></i>Template file</a></li>
-                <li><a href="commandLine.html"> <i class="icon-screen"></i>Command line</a></li>
-              </ul>
-            </li>
-          </ul>
+            <ul id="side-main-menu" class="side-menu list-unstyled">
+                <li class="{% block active %}{% endblock %}"><a href="/SNCS/index"> <i class="icon-home"></i>Home</a></li>
+            </ul>
+          <h5 class="sidenav-heading">Management</h5>
+            <ul id="side-main-menu" class="side-menu list-unstyled ">
+                <li class="{% block active2 %}{% endblock %}"><a href="/SNCS/d1config/0"> <i class="icon-form"></i>Day 1 Configuration</a></li>
+                <li class="{% block active3 %}{% endblock %}"><a href="/SNCS/template_file"> <i class="icon-list"></i>Template file</a></li>
+                <li class="{% block active4 %}{% endblock %}"><a href="/SNCS/commandLine"> <i class="icon-screen"></i>Command line</a></li>
+            </ul>
         </div>
       </div>
     </nav>
@@ -92,7 +91,7 @@
                     <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-bell"></i>view all notifications                                            </strong></a></li>
                   </ul>
                 </li>
-                <li class="nav-item"><a href="login.html" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                <li class="nav-item"><a href="login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>

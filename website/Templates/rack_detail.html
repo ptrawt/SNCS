@@ -6,7 +6,7 @@
         <div class="breadcrumb-holder">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SNCS/index">Home</a></li>
                     <li class="breadcrumb-item active">Rack detail</li>
                 </ul>
             </div>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="card-body">
                         <ul>
-                            <span><strong>Host name : </strong>{{ host_rpi }}</span><br><br>
+                            <span><strong>Hostname : </strong>{{ host_rpi }}</span><br><br>
                             <span><strong>IP Address : </strong>{{ ip_rpi }}</span>
                         </ul>
                         <div class="line"></div>
@@ -34,7 +34,7 @@
                             <span><strong>Network device connected</strong></span><br>
                             {% for i in sn_nd %}
                                 <ul>
-                                    <li><a href="node_detail.html">{{ i }}</a></li>
+                                    <li><a href="/SNCS/node_detail/{{ ip_rpi }}/{{ i }}">{{ i }}</a></li>
                                 </ul>
                             {% endfor %}
                         </ul>

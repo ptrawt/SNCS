@@ -76,8 +76,13 @@ WSGI_APPLICATION = 'SNCS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'sncs_db',
+        'ENGINE': 'mysql.connector.django',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'OPTIONS': {
+          'autocommit': True,
+        },
     }
 }
 
@@ -121,6 +126,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/website/static',
-]
+    os.path.join(BASE_DIR, "static", '/website/static'),]

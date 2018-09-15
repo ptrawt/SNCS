@@ -4,6 +4,7 @@
     {% block active %}
         active
     {% endblock %}
+
     {% block content %}
     <!-- Counts Section -->
     <section class="dashboard-counts section-padding">
@@ -14,7 +15,7 @@
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-user"></i></div>
                 <div class="name"><strong class="text-uppercase">Rack</strong><span>Last 5 days</span>
-                  <div class="count-number">8</div>
+                  <div class="count-number">{{ rack_count }}</div>
                 </div>
               </div>
             </div>
@@ -23,7 +24,7 @@
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-padnote"></i></div>
                 <div class="name"><strong class="text-uppercase">All Devices</strong><span>Last 5 days</span>
-                  <div class="count-number">384</div>
+                  <div class="count-number">{{ devices_count }}</div>
                 </div>
               </div>
             </div>
@@ -66,7 +67,7 @@
                     <div id="updates-box" role="tabpanel" class="collapse">
                         <!-- Item-->
                         {% for i in var %}
-                            <li><a href="rack_detail.html">{{ i }}</a></li>
+                            <li><a href="rack_detail/{{ i.ip }}">{{ i.hostname }}</a></li>
                         {% endfor %}
                     </div>
               </div>

@@ -6,8 +6,8 @@
         <div class="breadcrumb-holder">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="rack_detail.html">Rack detail</a></li>
+                    <li class="breadcrumb-item"><a href="/SNCS/index">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SNCS/rack_detail/{{ ip_rpi }}">Rack detail</a></li>
                     <li class="breadcrumb-item active">Node detail</li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
                         </tr>
                         <tr>
                           <td>Serial number</td>
-                          <td>FOC1111Z352</td>
+                          <td>{{ var1 }}</td>
                         </tr>
                         <tr>
                           <td>Manufacturer</td>
@@ -140,8 +140,8 @@
                     <div class="card-body">
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-4">
-                            <a href="d1config.html"><button type="submit" class="btn btn-primary">Day 1 Configuration</button></a>
-                            <a href="commandLine.html"><button type="submit" class="btn btn-secondary">Command line</button></a>
+                            <a href="/SNCS/d1config/{{ var1 }}"><button type="submit" class="btn btn-primary">Day 1 Configuration</button></a>
+                            <a href="commandLine"><button type="submit" class="btn btn-secondary">Command line</button></a>
                           </div>
                         </div>
                     </div>

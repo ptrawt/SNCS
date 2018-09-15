@@ -9,7 +9,7 @@
         <div class="breadcrumb-holder">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Management</a></li>
+                    <li class="breadcrumb-item"><a href="/SNCS/index">Management</a></li>
                     <li class="breadcrumb-item active">Day 1 Configuration       </li>
                 </ul>
             </div>
@@ -31,10 +31,9 @@
                       <label class="col-sm-2">Controller</label>
                       <div class="col-md-3">
                         <select name="account" class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
+                          {% for i in  %}
+                              <option>{{ i }}</option>
+                          {% endfor %}
                         </select>
                       </div>
                       <label class="col-sm-2">Devices</label>
@@ -65,10 +64,9 @@
                       <label class="col-sm-2">Serial number</label>
                       <div class="col-md-3">
                         <select name="account" class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
+                          {% for i in sn %}
+                              <option>{{ i }}</option>
+                          {% endfor %}
                         </select>
                       </div>
                       <label class="col-sm-2">or Host name</label>
@@ -91,7 +89,7 @@
                   <h4>Configuration</h4>
                 </div>
                 <div class="card-body">
-                  <form class="form-horizontal">
+                  <form action="d1config.html" class="form-horizontal">
                     <div class="form-group row">
                       <label class="col-sm-2 form-control-label">text area</label>
                       <div class="col-md-9">
@@ -107,7 +105,7 @@
                     <div class="form-group row">
                       <div class="col-sm-4 offset-sm-5">
                         <button type="submit" class="btn btn-primary">Save changes</button>
-                        <a href="index.html"><button type="submit" class="btn btn-secondary">Cancel</button></a>
+                        <a href="index"><button type="submit" class="btn btn-secondary">Cancel</button></a>
                       </div>
                     </div>
                   </form>
