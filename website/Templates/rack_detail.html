@@ -6,7 +6,7 @@
         <div class="breadcrumb-holder">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/SNCS/index">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/index">Home</a></li>
                     <li class="breadcrumb-item active">Rack detail</li>
                 </ul>
             </div>
@@ -34,7 +34,7 @@
                             <span><strong>Network device connected</strong></span><br>
                             {% for i in sn_nd %}
                                 <ul>
-                                    <li><a href="/SNCS/node_detail/{{ ip_rpi }}/{{ i }}">{{ i }}</a></li>
+                                    <li><a href="/node_detail/{{ ip_rpi }}/{{ i.ser_num }}">{{ i.ser_num }}</a></li>
                                 </ul>
                             {% endfor %}
                         </ul>
@@ -48,7 +48,7 @@
                         </div>
                         <!-- Pie Chart-->
                         <div class="pie-chart">
-                            <canvas id="pieChart" width="300" height="300"> </canvas>
+                            <canvas id="pieChart" width="300" height="300">{{ dev }}.{{ count_dev }}</canvas>
                         </div>
                     </div>
                 </div>

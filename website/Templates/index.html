@@ -14,7 +14,7 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-user"></i></div>
-                <div class="name"><strong class="text-uppercase">Rack</strong><span>Last 5 days</span>
+                <div class="name"><strong class="text-uppercase">Controller</strong><span>Last 5 minutes</span>
                   <div class="count-number">{{ rack_count }}</div>
                 </div>
               </div>
@@ -23,7 +23,7 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-padnote"></i></div>
-                <div class="name"><strong class="text-uppercase">All Devices</strong><span>Last 5 days</span>
+                <div class="name"><strong class="text-uppercase">All Devices</strong><span>Last 5 minutes</span>
                   <div class="count-number">{{ devices_count }}</div>
                 </div>
               </div>
@@ -32,8 +32,8 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-check"></i></div>
-                <div class="name"><strong class="text-uppercase">Active</strong><span>Last 2 months</span>
-                  <div class="count-number">350</div>
+                <div class="name"><strong class="text-uppercase">Active</strong><span>Last 5 minutes</span>
+                  <div class="count-number">{{ sta_up }}</div>
                 </div>
               </div>
             </div>
@@ -41,8 +41,8 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-bill"></i></div>
-                <div class="name"><strong class="text-uppercase">Non-active</strong><span>Last 2 days</span>
-                  <div class="count-number">34</div>
+                <div class="name"><strong class="text-uppercase">Non-active</strong><span>Last 5 minutes</span>
+                  <div class="count-number">{{ sta_down }}</div>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@
                     <div id="updates-box" role="tabpanel" class="collapse">
                         <!-- Item-->
                         {% for i in var %}
-                            <li><a href="rack_detail/{{ i.ip }}">{{ i.hostname }}</a></li>
+                            <li><a href="/rack_detail/{{ i.ip }}">{{ i.hostname }}</a></li>
                         {% endfor %}
                     </div>
               </div>
@@ -81,9 +81,8 @@
             <div class="col-lg-4 col-md-6">
               <div class="card project-progress">
                 <h2 class="display h4">Type of all devices</h2>
-                <!--<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
                 <div class="pie-chart">
-                  <canvas id="pieChart" width="300" height="300"> </canvas>
+                  <canvas id="pieChart"  width="300" height="300">{{ dev }}.{{ count_dev }}</canvas>
                 </div>
               </div>
             </div>

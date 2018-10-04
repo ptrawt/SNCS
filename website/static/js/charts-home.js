@@ -76,17 +76,21 @@ $(document).ready(function () {
     // Pie Chart
     // ------------------------------------------------------ //
     var PIECHART = $('#pieChart');
+    var pievalue = $('#pieChart').text();
+    var output = pievalue.split(".");
+    var len = (output.length)-1;
+    var devcie = output[0].split(',');
+    devcie.splice(-1, 1)
+    var num_devcie = output[1].split(',');
+    num_devcie.splice(-1, 1)
+
     var myPieChart = new Chart(PIECHART, {
         type: 'doughnut',
         data: {
-            labels: [
-                "First",
-                "Second",
-                "Third"
-            ],
+            labels: devcie,
             datasets: [
                 {
-                    data: [300, 50, 100],    // รอ database
+                    data: num_devcie,
                     borderWidth: [1, 1, 1],
                     backgroundColor: [
                         brandPrimary,
@@ -98,8 +102,8 @@ $(document).ready(function () {
                         "rgba(75,192,192,1)",
                         "#FFCE56"
                     ]
-                }]
+                }
+            ]
         }
     });
-
 });

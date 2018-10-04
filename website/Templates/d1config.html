@@ -9,7 +9,7 @@
         <div class="breadcrumb-holder">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/SNCS/index">Management</a></li>
+                    <li class="breadcrumb-item"><a href="/index">Management</a></li>
                     <li class="breadcrumb-item active">Day 1 Configuration       </li>
                 </ul>
             </div>
@@ -19,81 +19,80 @@
         <div class="container-fluid">
             <!-- Page Header-->
           <header>
-            <h1 class="h3 display">Day 1 Configuration</h1>
+            <h1 class="h3 display">Configuration</h1>
           </header>
-          <div class="col-lg-9">
-              <div class="card">
-                <div class="card-header d-flex align-items-center">
-                  <h4>Filter devices</h4>
-                </div>
-                <div class="card-body">
-                    <div class="form-group row">
-                      <label class="col-sm-2">Controller</label>
-                      <div class="col-md-3">
-                        <select name="account" class="form-control">
-                          {% for i in  %}
-                              <option>{{ i }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                      <label class="col-sm-2">Devices</label>
-                      <div class="col-md-3">
-                        <select name="account" class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                        </select>
-                      </div>
+          <div class="container">
+              <div class="form-group">
+                  <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                      <h4>Filter device</h4>
                     </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                          <label class="col-sm-2">Controller</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in cont %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <label class="col-sm-2">Devices</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in dev %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
 
-                    <div class="form-group row">
-                      <label class="col-sm-2">Model device</label>
-                      <div class="col-md-3">
-                        <select name="account" class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                        </select>
-                      </div>
-                    </div>
+                        <div class="form-group row">
+                          <label class="col-sm-2">Model device</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in mod %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
 
-                    <div class="form-group row">
-                      <div class="line"></div>
-                      <label class="col-sm-2">Serial number</label>
-                      <div class="col-md-3">
-                        <select name="account" class="form-control">
-                          {% for i in sn %}
-                              <option>{{ i }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                      <label class="col-sm-2">or Host name</label>
-                      <div class="col-md-3">
-                        <select name="account" class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                        </select>
-                      </div>
+                        <div class="form-group row">
+                          <div class="line"></div>
+                          <label class="col-sm-2">Serial number</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in sn %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <label class="col-sm-2">or Hostname</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in host %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
                     </div>
-                </div>
+                  </div>
               </div>
-          </div>
+          </div><br>
           <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+              <div class="card">
                 <div class="card-header d-flex align-items-center">
-                  <h4>Configuration</h4>
+                  <h4>Add script or template file</h4>
                 </div>
                 <div class="card-body">
                   <form action="d1config.html" class="form-horizontal">
                     <div class="form-group row">
-                      <label class="col-sm-2 form-control-label">text area</label>
+                      <label class="col-sm-2 form-control-label">Script input</label>
                       <div class="col-md-9">
-                        <textarea id="text-area-2" class="form-control" rows="20" placeholder="Placeholder text."></textarea>
+                        <textarea id="text-area-2" class="form-control" rows="20" placeholder="text."></textarea>
                       </div>
                     </div>
                     <div class="line"></div>
@@ -105,7 +104,7 @@
                     <div class="form-group row">
                       <div class="col-sm-4 offset-sm-5">
                         <button type="submit" class="btn btn-primary">Save changes</button>
-                        <a href="index"><button type="submit" class="btn btn-secondary">Cancel</button></a>
+                        <a href="/index"><button type="submit" class="btn btn-secondary">Cancel</button></a>
                       </div>
                     </div>
                   </form>

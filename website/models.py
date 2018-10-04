@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -11,20 +12,23 @@ class Controller(models.Model):
     humidity = models.CharField(max_length=10)
     power = models.CharField(max_length=10)
 
-
-class User(models.Model):
-    username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254, unique=True)
+    def __str__(self):
+        return self.hostname
 
 
 class Devices(models.Model):
     name = models.CharField(max_length=45, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Model(models.Model):
     name = models.CharField(max_length=45, unique=True)
     devID = models.ForeignKey(Devices, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Network_devices(models.Model):

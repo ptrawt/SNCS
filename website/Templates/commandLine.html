@@ -15,5 +15,79 @@
           </ul>
         </div>
       </div>
+
+      <section class="forms">
+        <div class="container-fluid">
+          <!-- Page Header-->
+          <header>
+            <h1 class="h3 display">Command line</h1>
+          </header>
+          <div class="container">
+                <div class="form-group">
+                  <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                      <h4>Filter device</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                          <label class="col-sm-2">Controller</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in cont %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <label class="col-sm-2">Devices</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in dev %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-sm-2">Model device</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in mod %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="line"></div>
+                          <label class="col-sm-2">Serial number</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in sn %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <label class="col-sm-2">or Hostname</label>
+                          <div class="col-md-3">
+                            <select name="account" class="form-control">
+                              {% for i in host %}
+                                  <option>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="line"></div>
+                        <div class="col-sm-4 offset-sm-5">
+                            <button type="submit" class="btn btn-blue">To configure it!</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+    </section>
     {% endblock %}
 
