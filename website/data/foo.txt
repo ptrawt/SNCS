@@ -1,0 +1,12 @@
+conf t
+!
+hostname AIT
+!
+interface fa 0/1
+description ait555
+no sh
+!
+interface fa 0/2
+description ait555
+no sh
+!

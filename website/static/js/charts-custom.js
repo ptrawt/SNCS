@@ -97,40 +97,35 @@ $(document).ready(function () {
         responsive: true
     };
 
+    var data_in = $('#barChartExample').text();
+    var data_out = data_in.split('/')
+    var temp = data_out[0].split(',')
+    var hum = data_out[1].split(',')
     var barChartExample = new Chart(BARCHARTEXMPLE, {
         type: 'bar',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: ["Sensor1", "Sensor2", "Sensor3", "Sensor4"],
             datasets: [
                 {
-                    label: "Data Set 1",
+                    label: "Temperature (*c)",
                     backgroundColor: [
-                        'rgba(51, 179, 90, 0.6)',
-                        'rgba(51, 179, 90, 0.6)',
-                        'rgba(51, 179, 90, 0.6)',
-                        'rgba(51, 179, 90, 0.6)',
-                        'rgba(51, 179, 90, 0.6)',
-                        'rgba(51, 179, 90, 0.6)',
-                        'rgba(51, 179, 90, 0.6)'
+                        'rgba(255, 112, 60, 0.6)',
+                        'rgba(255, 112, 60, 0.6)',
+                        'rgba(255, 112, 60, 0.6)',
+                        'rgba(255, 112, 60, 0.6)'
                     ],
                     borderColor: [
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)'
+                        'rgba(255, 112, 60, 1)',
+                        'rgba(255, 112, 60, 1)',
+                        'rgba(255, 112, 60, 1)',
+                        'rgba(255, 112, 60, 1)'
                     ],
                     borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    data: [Number(temp[0]), Number(temp[1]), Number(temp[2]), Number(temp[3])],
                 },
                 {
-                    label: "Data Set 2",
+                    label: "Humidity (%)",
                     backgroundColor: [
-                        'rgba(203, 203, 203, 0.6)',
-                        'rgba(203, 203, 203, 0.6)',
-                        'rgba(203, 203, 203, 0.6)',
                         'rgba(203, 203, 203, 0.6)',
                         'rgba(203, 203, 203, 0.6)',
                         'rgba(203, 203, 203, 0.6)',
@@ -140,13 +135,10 @@ $(document).ready(function () {
                         'rgba(203, 203, 203, 1)',
                         'rgba(203, 203, 203, 1)',
                         'rgba(203, 203, 203, 1)',
-                        'rgba(203, 203, 203, 1)',
-                        'rgba(203, 203, 203, 1)',
-                        'rgba(203, 203, 203, 1)',
                         'rgba(203, 203, 203, 1)'
                     ],
                     borderWidth: 1,
-                    data: [35, 40, 60, 47, 88, 27, 30],
+                    data: [Number(hum[0]), Number(hum[1]), Number(hum[2]), Number(hum[3])],
                 }
             ]
         }

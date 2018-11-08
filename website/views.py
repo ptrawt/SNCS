@@ -1,19 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 import json
+from . import forms
+from subprocess import run, PIPE
+from django.contrib.auth.decorators import login_required
+count = 0
 
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def index(request):
     controller_set = Controller.objects.all()
     devices_set = Network_devices.objects.all()
     detail = Detail.objects.all()
     sta_down = len(devices_set) - len(detail.filter(status='Up'))
-    name_dev = ''
-    count_dev = ''
-    for i in Devices.objects.all():
-        name_dev += i.name+','
-        count_dev += str((len(devices_set.filter(devID=i.id))))+','
+    name_model = ''
+    count_model = ''
+    for i in Model.objects.all():
+        name_model += i.name+','
+        count_model += str((len(devices_set.filter(modID=i.id))))+','
 
     context = {
         'var': controller_set,
@@ -21,122 +26,195 @@ def index(request):
         'devices_count': len(devices_set),
         'sta_up': len(detail.filter(status='Up')),
         'sta_down': sta_down,
-        'dev': name_dev,
-        'count_dev': count_dev
+        'model': name_model,
+        'count_model': count_model
 
     }
     return render(request, 'index.html', context)
 
 
-def login(request):
-    return render(request, 'login.html')
+def uploaded_file(f, port):
+    inp = '1:'+port+':'
+    with open('C:/Users/dell/Documents/GitHub/SNCS/website/data/config/config_script.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+            chunk2 = chunk.decode()
+            for i in chunk2.split('\r\n'):
+                inp += i+','
+
+        data = run(['python', 'C:\\Users\\dell\\Desktop\\python\\server\\client_config.py'],
+                   stdout=PIPE, input=inp, encoding='ascii')
+
+        return data.stdout
 
 
-def register(request):
-    return render(request, 'register.html')
-
-
+@login_required(login_url='/accounts/login/')
 def d1config(request, sn):
+    controller = Controller.objects.all()
+    model = Model.objects.all()
     devices = Network_devices.objects.all()
-    sn_all = []
-    d_all = []
-    m_all = []
-    c_all = []
-    hn_all = []
-    for i in devices:
-        sn_all.append(i.ser_num)
-        hn_all.append(i.hostname)
-        if len(c_all) == 0:
-            c_all.append(i.con_id.hostname)
-        elif i.con_id.hostname == c_all[0]:
-            pass
-        if len(d_all) == 0:
-            d_all.append(i.devID)
-        elif i.devID == d_all[0]:
-            pass
-        m_all.append(i.modID)
+    port = Detail.objects.all()
+    sett = []
 
-    if sn == '0':
-        serial = sn_all
-        host = hn_all
-        cont = c_all
-        dev = d_all
-        mod = m_all
+    if request.method == 'POST':
+        form = forms.addConfig(request.POST, request.FILES)
+        if form.is_valid():
+            script = form.cleaned_data['script']
+            p_ser = port.get(ser_num=sn)
+            if script == '':
+                result = uploaded_file(request.FILES['upload'], p_ser.serial_port)
+                for line in result.split(','):
+                    sett.append(line)
+                return render(request, 'config_success.html', {'var': sett})
+            else:
+                inp = '1:'+p_ser.serial_port+':'
+                for i in script.split('\r\n'):
+                    inp += i+','
+                data = run(['python', 'C:\\Users\\dell\\Desktop\\python\\server\\client_config.py'],
+                           stdout=PIPE, input=inp, encoding='ascii')
+                out = data.stdout
+                for line in out.split(','):
+                    sett.append(line)
+                with open('C:/Users/dell/Documents/GitHub/SNCS/website/data/config/config_script.txt', 'wb+') as destination:
+                    destination.write(script.encode())
+
+                return render(request, 'config_success.html', {'var': sett})
     else:
-        serial = [sn]
-        d = devices.filter(ser_num=sn)
-        for i in d:
-            cont = [i.con_id.hostname]
-            dev = [i.devID.name]
-            mod = [i.modID.name]
-            host = [i.hostname]
+        form = forms.addConfig()
 
     context = {
-        'sn': serial,
-        'cont': cont,
-        'dev': dev,
-        'mod': mod,
-        'host': host
+        'controller': controller,
+        'model': model,
+        'net_device': devices,
+        'sn': sn,
+        'form': form
     }
 
     return render(request, 'd1config.html', context)
 
 
+@login_required(login_url='/accounts/login/')
 def cmd(request, sn):
+    controller = Controller.objects.all()
+    model = Model.objects.all()
     devices = Network_devices.objects.all()
-    sn_all = []
-    d_all = []
-    m_all = []
-    c_all = []
-    hn_all = []
-    for i in devices:
-        sn_all.append(i.ser_num)
-        hn_all.append(i.hostname)
-        if len(c_all) == 0:
-            c_all.append(i.con_id.hostname)
-        elif i.con_id.hostname == c_all[0]:
-            pass
-        if len(d_all) == 0:
-            d_all.append(i.devID)
-        elif i.devID == d_all[0]:
-            pass
-        m_all.append(i.modID)
+    port = Detail.objects.all()
+    sett = []
+    global count
 
-    if sn == '0':
-        serial = sn_all
-        host = hn_all
-        cont = c_all
-        dev = d_all
-        mod = m_all
+    if request.method == 'POST':
+        command = request.POST.get("command", "")
+        port = port.get(ser_num=sn)
+        # print(command)
+        inp = '2:' + port.serial_port + ':' + command
+        data = run(['python', 'C:\\Users\\dell\\Desktop\\python\\server\\client_config.py'],
+                   stdout=PIPE, input=inp, encoding='ascii')
+        data_out = data.stdout
+        data_out = data_out.split('\n')
+        # print(data_out)
+
+        del data_out[0]
+        print(data_out)
+        print(len(data_out))
+        output = ''
+        count = 0
+        for i in data_out:
+            if i == '':
+                count += 1
+                pass
+            elif 'Connect close' in i:
+                count += 1
+                pass
+            else:
+                if count != len(data_out)-3:
+                    output += i+'\n'
+                    count += 1
+                else:
+                    output += i
+
+        print(output.encode())
+
+        response_data = {}
+        try:
+            response_data['result'] = 'Input success.'
+            response_data['message'] = output
+        except:
+            response_data['result'] = 'Oh No'
+            response_data['message'] = 'subprocess is not run'
+
+        return HttpResponse(json.dumps(response_data), content_type='application/json')
+    '''
+    if request.method == 'POST':
+        form = forms.cmd(request.POST)
+        if form.is_valid():
+            data_in = form.cleaned_data['data_in']
+            port = port.get(ser_num=sn)
+            #if data_in == '':
+             #   data_in += '\r\n'
+            #print(data_in.encode())
+            inp = '2:'+port.serial_port+':'+data_in
+            data = run(['python', 'C:\\Users\\dell\\Desktop\\python\\server\\client_config.py'],
+                       stdout=PIPE, input=inp, encoding='ascii')
+            data_out = data.stdout
+            #print(data.stdout)
+            for line in data_out.split(','):
+                for out in line.split('\n'):
+                    if out == '':
+                        pass
+                    elif 'Connect close' in out:
+                        pass
+                    elif out == data_in:
+                        pass
+                    elif out == '1':
+                        pass
+                    else:
+                        sett.append(out+'\n')
+            #print(sett)
+            with open('C:/Users/dell/Documents/GitHub/SNCS/website/data/config/cmd_logging_'+sn+'.txt', 'ab+') as destination:
+                destination.write(data_out.encode())
+
+            form = forms.cmd()
+            return render(request, 'commandLine.html', {'var': sett, 'form': form})
     else:
-        serial = [sn]
-        d = devices.filter(ser_num=sn)
-        for i in d:
-            cont = [i.con_id.hostname]
-            dev = [i.devID.name]
-            mod = [i.modID.name]
-            host = [i.hostname]
+        form = forms.cmd()
+    '''
 
     context = {
-        'sn': serial,
-        'cont': cont,
-        'dev': dev,
-        'mod': mod,
-        'host': host
+        'controller': controller,
+        'model': model,
+        'net_device': devices,
+        'sn': sn,
+        #'form': form
     }
 
     return render(request, 'commandLine.html', context)
 
 
+@login_required(login_url='/accounts/login/')
 def rack_detail(request, ip):
-    var1 = Controller.objects.get(ip=ip)
-    net_device = Network_devices.objects.filter(con_id=var1.id)
-    host_rpi = var1.hostname
-    ip_nd = ['100.10.1.10', '100.10.1.11', '100.10.1.12', '100.10.1.13']
-    sn_nd = net_device
+    controller = Controller.objects.get(ip=ip)
+    net_device = Network_devices.objects.filter(con_id=controller.id)
     name_dev = ''
     count_dev = ''
-    print(net_device)
+    sensor = [controller.sensor1, controller.sensor2, controller.sensor3, controller.sensor4]
+    temp = ''
+    hum = ''
+    c = 0
+
+    for j in sensor:
+        c += 1
+        var = j.split(' ')
+        var1 = var[0].split('=')
+        v_temp = var1[1].split('*')
+        var2 = var[1].split('=')
+        v_hum = var2[1].split('%')
+        if c != 4:
+            temp += v_temp[0]+','
+            hum += v_hum[0]+','
+        else:
+            temp += v_temp[0]
+            hum += v_hum[0]
+
     for i in net_device.all():
         if i.devID.name not in name_dev:
             name_dev += i.devID.name + ','
@@ -145,22 +223,24 @@ def rack_detail(request, ip):
             pass
 
     context = {
-        'host_rpi': host_rpi,
+        'controller': controller,
         'ip_rpi': ip,
-        'ip_nd': ip_nd,
-        'sn_nd': sn_nd,
+        'sn_nd': net_device,
         'dev': name_dev,
-        'count_dev': count_dev
+        'count_dev': count_dev,
+        'temp': temp,
+        'humidity': hum
 
     }
     return render(request, 'rack_detail.html', context)
 
 
-def node_detail(request, ip, sn):
-    det = Detail.objects.get(ser_num=sn)
-    dev = Network_devices.objects.get(ser_num=sn)
+@login_required(login_url='/accounts/login/')
+def node_detail(request, ip, id):
+    det = Detail.objects.get(ser_num=id)
+    dev = Network_devices.objects.get(ser_num=id)
     context = {
-        'var1': sn,
+        'var1': id,
         'ip_rpi': ip,
         'det': det,
         'fan': det.fan,
@@ -173,10 +253,11 @@ def node_detail(request, ip, sn):
     return render(request, 'node_detail.html', context)
 
 
+@login_required(login_url='/accounts/login/')
 def template_file(request):
+    file = Base_template.objects.all()
     devices = Devices.objects.all()
     models = Model.objects.all()
-
     model = []
     model.append(['Select courses'])
     for d in devices:
@@ -186,13 +267,41 @@ def template_file(request):
                 filtered_model.append(m.name)
         model.append(filtered_model)
 
-    print(model)
+    if request.method == 'POST':
+        form = forms.UploadBasetemp(request.POST, request.FILES)
+        if form.is_valid():
+            # save base to db
+            instance = form.save(commit=False)
+            instance.save()
+
+            return redirect('template_file')
+    else:
+        form = forms.UploadBasetemp()
+
     context = {
+        'file': file,
         'dev': devices.order_by('name'),
         'mod': models,
-        'model': json.dumps(model)
+        'model': json.dumps(model),
+        'form': form
     }
 
     return render(request, 'template_file.html', context)
 
 
+@login_required(login_url='/accounts/login/')
+def delete_base_file(request, id):
+    file = Base_template.objects.get(id=id)
+    file.delete()
+
+    return redirect('template_file')
+
+
+@login_required(login_url='/accounts/login/')
+def view_base_file(request, id):
+    file = Base_template.objects.get(id=id)
+    fo = open("C:/Users/dell/Documents/GitHub/SNCS/website/data/"+file.upload.name, "r")
+    txt = fo.read()
+    txt = txt.split('\n')
+
+    return render(request, 'view_base_file.html', {'txt': txt, 'name': file.upload.name})

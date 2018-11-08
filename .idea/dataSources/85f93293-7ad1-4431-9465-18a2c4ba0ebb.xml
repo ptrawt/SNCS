@@ -1416,400 +1416,400 @@ model</ColNames>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="333" parent="242" name="name">
+    <column id="333" parent="242" name="create_date">
       <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="334" parent="242" name="create_date">
-      <Position>3</Position>
       <DataType>datetime(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="335" parent="242" name="description">
-      <Position>4</Position>
+    <column id="334" parent="242" name="description">
+      <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="242" name="upload">
-      <Position>5</Position>
+    <column id="335" parent="242" name="upload">
+      <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="337" parent="242" name="modID_id">
-      <Position>6</Position>
+    <column id="336" parent="242" name="modID_id">
+      <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="338" parent="242" name="website_base_template_modID_id_f49191b1">
+    <index id="337" parent="242" name="website_base_template_modID_id_f49191b1">
       <ColNames>modID_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="339" parent="242" name="PRIMARY">
+    <key id="338" parent="242" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="340" parent="242" name="website_base_template_modID_id_f49191b1_fk_website_model_id">
+    <foreign-key id="339" parent="242" name="website_base_template_modID_id_f49191b1_fk_website_model_id">
       <ColNames>modID_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_model</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="341" parent="243" name="id">
+    <column id="340" parent="243" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="342" parent="243" name="hostname">
+    <column id="341" parent="243" name="hostname">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="343" parent="243" name="ip">
+    <column id="342" parent="243" name="ip">
       <Position>3</Position>
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="243" name="temp">
+    <column id="343" parent="243" name="sensor2">
       <Position>4</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="243" name="humidity">
+    <column id="344" parent="243" name="sensor1">
       <Position>5</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="346" parent="243" name="power">
+    <column id="345" parent="243" name="power">
       <Position>6</Position>
       <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="243" name="status">
+    <column id="346" parent="243" name="status">
       <Position>7</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="348" parent="243" name="website_controller_hostname_8d08e4f6_uniq">
+    <column id="347" parent="243" name="sensor3">
+      <Position>8</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="348" parent="243" name="sensor4">
+      <Position>9</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="349" parent="243" name="website_controller_hostname_8d08e4f6_uniq">
       <ColNames>hostname</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="349" parent="243" name="website_controller_ip_e5e19988_uniq">
+    <index id="350" parent="243" name="website_controller_ip_e5e19988_uniq">
       <ColNames>ip</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="350" parent="243" name="PRIMARY">
+    <key id="351" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="351" parent="243" name="website_controller_hostname_8d08e4f6_uniq">
+    <key id="352" parent="243" name="website_controller_hostname_8d08e4f6_uniq">
       <ColNames>hostname</ColNames>
       <UnderlyingIndexName>website_controller_hostname_8d08e4f6_uniq</UnderlyingIndexName>
     </key>
-    <key id="352" parent="243" name="website_controller_ip_e5e19988_uniq">
+    <key id="353" parent="243" name="website_controller_ip_e5e19988_uniq">
       <ColNames>ip</ColNames>
       <UnderlyingIndexName>website_controller_ip_e5e19988_uniq</UnderlyingIndexName>
     </key>
-    <column id="353" parent="244" name="ser_num_id">
+    <column id="354" parent="244" name="ser_num_id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="354" parent="244" name="status">
+    <column id="355" parent="244" name="status">
       <Position>2</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="355" parent="244" name="manufacturer">
+    <column id="356" parent="244" name="manufacturer">
       <Position>3</Position>
-      <DataType>varchar(25)|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="356" parent="244" name="up_time">
+    <column id="357" parent="244" name="up_time">
       <Position>4</Position>
-      <DataType>varchar(25)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="357" parent="244" name="interface_using">
+    <column id="358" parent="244" name="interface_using">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="358" parent="244" name="sw_image">
+    <column id="359" parent="244" name="sw_image">
       <Position>6</Position>
-      <DataType>varchar(25)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="244" name="sw_version">
+    <column id="360" parent="244" name="sw_version">
       <Position>7</Position>
-      <DataType>varchar(25)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="244" name="last_reset">
+    <column id="361" parent="244" name="last_reset">
       <Position>8</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="244" name="fan">
+    <column id="362" parent="244" name="fan">
       <Position>9</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="362" parent="244" name="temp">
+    <column id="363" parent="244" name="temp">
       <Position>10</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="363" parent="244" name="power">
+    <column id="364" parent="244" name="power">
       <Position>11</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="364" parent="244" name="ip">
+    <column id="365" parent="244" name="ip">
       <Position>12</Position>
       <DataType>varchar(15)|0s</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="365" parent="244" name="serial_port">
+    <column id="366" parent="244" name="serial_port">
       <Position>13</Position>
-      <DataType>varchar(10)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="366" parent="244" name="PRIMARY">
+    <key id="367" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ser_num_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="367" parent="244" name="website_detail_ser_num_id_b8cdd333_fk">
+    <foreign-key id="368" parent="244" name="website_detail_ser_num_id_b8cdd333_fk">
       <ColNames>ser_num_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_network_devices</RefTableName>
       <RefColNames>ser_num</RefColNames>
     </foreign-key>
-    <column id="368" parent="245" name="id">
+    <column id="369" parent="245" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="369" parent="245" name="name">
+    <column id="370" parent="245" name="name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="370" parent="245" name="name">
+    <index id="371" parent="245" name="name">
       <ColNames>name</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="371" parent="245" name="PRIMARY">
+    <key id="372" parent="245" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="372" parent="245" name="name">
+    <key id="373" parent="245" name="name">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
-    <column id="373" parent="246" name="id">
+    <column id="374" parent="246" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="374" parent="246" name="date">
+    <column id="375" parent="246" name="date">
       <Position>2</Position>
       <DataType>datetime(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="375" parent="246" name="desc">
+    <column id="376" parent="246" name="desc">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="376" parent="246" name="ser_num_id">
+    <column id="377" parent="246" name="ser_num_id">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="377" parent="246" name="userID_id">
+    <column id="378" parent="246" name="userID_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="378" parent="246" name="website_management_ser_num_id_8db8d207">
+    <index id="379" parent="246" name="website_management_ser_num_id_8db8d207">
       <ColNames>ser_num_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="379" parent="246" name="website_management_userID_id_65e2f6d3">
+    <index id="380" parent="246" name="website_management_userID_id_65e2f6d3">
       <ColNames>userID_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="380" parent="246" name="PRIMARY">
+    <key id="381" parent="246" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="381" parent="246" name="website_management_ser_num_id_8db8d207_fk">
+    <foreign-key id="382" parent="246" name="website_management_ser_num_id_8db8d207_fk">
       <ColNames>ser_num_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_network_devices</RefTableName>
       <RefColNames>ser_num</RefColNames>
     </foreign-key>
-    <foreign-key id="382" parent="246" name="website_management_userID_id_65e2f6d3_fk_auth_user_id">
+    <foreign-key id="383" parent="246" name="website_management_userID_id_65e2f6d3_fk_auth_user_id">
       <ColNames>userID_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="383" parent="247" name="id">
+    <column id="384" parent="247" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="384" parent="247" name="name">
+    <column id="385" parent="247" name="name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="385" parent="247" name="devID_id">
+    <column id="386" parent="247" name="devID_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="386" parent="247" name="name">
+    <index id="387" parent="247" name="name">
       <ColNames>name</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="387" parent="247" name="website_model_devID_id_ede7335d_fk_website_devices_id">
+    <index id="388" parent="247" name="website_model_devID_id_ede7335d_fk_website_devices_id">
       <ColNames>devID_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="388" parent="247" name="PRIMARY">
+    <key id="389" parent="247" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="389" parent="247" name="name">
+    <key id="390" parent="247" name="name">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
-    <foreign-key id="390" parent="247" name="website_model_devID_id_ede7335d_fk_website_devices_id">
+    <foreign-key id="391" parent="247" name="website_model_devID_id_ede7335d_fk_website_devices_id">
       <ColNames>devID_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_devices</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="391" parent="248" name="ser_num">
+    <column id="392" parent="248" name="ser_num">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="392" parent="248" name="hostname">
+    <column id="393" parent="248" name="hostname">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="393" parent="248" name="con_id_id">
+    <column id="394" parent="248" name="con_id_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="394" parent="248" name="devID_id">
+    <column id="395" parent="248" name="devID_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="395" parent="248" name="modID_id">
+    <column id="396" parent="248" name="modID_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="396" parent="248" name="website_network_devices_hostname_59b1a335_uniq">
+    <index id="397" parent="248" name="website_network_devices_hostname_59b1a335_uniq">
       <ColNames>hostname</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="397" parent="248" name="website_network_devices_con_id_id_0451f7e2">
+    <index id="398" parent="248" name="website_network_devices_con_id_id_0451f7e2">
       <ColNames>con_id_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="398" parent="248" name="website_network_devices_devID_id_2189e1de">
+    <index id="399" parent="248" name="website_network_devices_devID_id_2189e1de">
       <ColNames>devID_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="399" parent="248" name="website_network_devices_modID_id_782f3bae">
+    <index id="400" parent="248" name="website_network_devices_modID_id_782f3bae">
       <ColNames>modID_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="400" parent="248" name="PRIMARY">
+    <key id="401" parent="248" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ser_num</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="401" parent="248" name="website_network_devices_hostname_59b1a335_uniq">
+    <key id="402" parent="248" name="website_network_devices_hostname_59b1a335_uniq">
       <ColNames>hostname</ColNames>
       <UnderlyingIndexName>website_network_devices_hostname_59b1a335_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="402" parent="248" name="website_network_devi_con_id_id_0451f7e2_fk_website_c">
+    <foreign-key id="403" parent="248" name="website_network_devi_con_id_id_0451f7e2_fk_website_c">
       <ColNames>con_id_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_controller</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="403" parent="248" name="website_network_devices_devID_id_2189e1de_fk_website_devices_id">
+    <foreign-key id="404" parent="248" name="website_network_devices_devID_id_2189e1de_fk_website_devices_id">
       <ColNames>devID_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_devices</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="404" parent="248" name="website_network_devices_modID_id_782f3bae_fk_website_model_id">
+    <foreign-key id="405" parent="248" name="website_network_devices_modID_id_782f3bae_fk_website_model_id">
       <ColNames>modID_id</ColNames>
       <RefSchemaName>sncs_db</RefSchemaName>
       <RefTableName>website_model</RefTableName>

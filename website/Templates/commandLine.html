@@ -19,75 +19,150 @@
       <section class="forms">
         <div class="container-fluid">
           <!-- Page Header-->
-          <header>
-            <h1 class="h3 display">Command line</h1>
-          </header>
+        <header style="padding-bottom: 0px"></header>
+        {% if sn == '0' %}
           <div class="container">
-                <div class="form-group">
+              <div class="col-lg-11" style="padding-left: 0px;margin-left: 45px;">
                   <div class="card">
                     <div class="card-header d-flex align-items-center">
                       <h4>Filter device</h4>
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                          <label class="col-sm-2">Controller</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in cont %}
-                                  <option>{{ i }}</option>
+                        <div class="form-group row" style="margin-top: 20px">
+                            <label style="margin-right: 25px; margin-left: 38px; padding-top: 10px;"><strong>Controller</strong></label>
+                          <div class="col-md-3" style="padding-left: 0px;">
+                            <select id="controller" class="form-control">
+                                <option value="">Select all...</option>
+                              {% for i in controller %}
+                                  <option value="{{ i }}">{{ i }}</option>
                               {% endfor %}
                             </select>
                           </div>
-                          <label class="col-sm-2">Devices</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in dev %}
-                                  <option>{{ i }}</option>
+                            <label style="padding-left: 40px; margin-right: 25px; padding-top: 10px;"><strong>Model device</strong></label>
+                          <div class="col-md-3" style="padding-left: 0px;">
+                            <select id="model" class="form-control">
+                                <option value="">Select all...</option>
+                              {% for i in model %}
+                                  <option value="{{ i }}">{{ i }}</option>
                               {% endfor %}
                             </select>
                           </div>
+                        </div>
+                        <div class="line" style="margin-bottom: 0px;"></div>
+                    </div>
+
+                    <div class="form-group row" style="margin-top: 20px">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+                        <div class="container col-lg-11" style="padding-left: 0px">
+                            <label style="margin-bottom: 10px"><strong>Hostname or Serial number.</strong></label>
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                            <br>
+                            <table class="table table-bordered table-striped">
+                              <thead>
+                                <tr>
+                                    <th>Hostname</th>
+                                    <th>Serial number</th>
+                                    <th>Model</th>
+                                    <th>Controller</th>
+                                </tr>
+                              </thead>
+                              <tbody id="myTable">
+                                {% for i in net_device %}
+                                    <tr>
+                                        <td><a href="/commandLine/{{ i.ser_num }}/">{{ i.hostname }}</a></td>
+                                        <td>{{ i.ser_num }}</td>
+                                        <td>{{ i.modID.name }}</td>
+                                        <td>{{ i.con_id.hostname }}</td>
+                                    </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
                         </div>
 
-                        <div class="form-group row">
-                          <label class="col-sm-2">Model device</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in mod %}
-                                  <option>{{ i }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="form-group row">
-                          <div class="line"></div>
-                          <label class="col-sm-2">Serial number</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in sn %}
-                                  <option>{{ i }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                          <label class="col-sm-2">or Hostname</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in host %}
-                                  <option>{{ i }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="line"></div>
-                        <div class="col-sm-4 offset-sm-5">
-                            <button type="submit" class="btn btn-blue">To configure it!</button>
-                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                $("#controller").on("change", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                            $(document).ready(function(){
+                                $("#model").on("change", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                            $(document).ready(function(){
+                                $("#myInput").on("keyup", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                   </div>
-                </div>
+              </div>
           </div>
+        {% else %}
+          <div align="center">
+            <div class="col-lg-7" style="padding-left: 0px;">
+              <div class="card">
+                <div class="card-body">
+                    <form onsubmit="return false;">
+                        {% csrf_token %}
+                        <textarea id="myTextarea" rows="17" class="col-lg-11 data_out"
+                                  style="padding: 5px 0px 0px 10px;
+                                  margin: 20px 20px 0px 30px;"></textarea>
+                        <br>
+                        <input id="myInput" style="width: 91%;margin-left: 1%; padding-left: 1%" class="data_out" onclick="this.value=''" value='' >
+                    </form>
+
+                    <script type="text/javascript">
+                        window.onload = function() {
+                          document.getElementById("myTextarea").readOnly = "true";
+                          document.getElementById("myInput").focus();
+                        };
+
+                        var input = document.getElementById("myInput");
+                        var data = document.getElementById("myTextarea");
+                        input.addEventListener("keyup", function(event) {
+                            event.preventDefault();
+                            if (event.keyCode === 13) {
+                                var lis = data.value.split('\n');
+	    	                    var inp = lis[lis.length-1]+input.value;
+
+	    	                    $.ajax({
+                                    type: 'POST',
+                                    url: "/commandLine/{{ sn }}/",
+                                    dataType: "json",
+                                    data: {
+                                        command: $('#myInput').val(),
+                                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                                    },
+
+                                    success: function (json) {
+                                        $('#myTextarea').html(data.value+'\n'+inp+'\n'+json.message);
+
+                                    }
+                                })
+                                document.getElementById("myInput").click();
+                            }
+                        });
+                    </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
         </div>
-    </section>
+      </section>
     {% endblock %}
 

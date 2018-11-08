@@ -8,9 +8,11 @@ class Controller(models.Model):
     hostname = models.CharField(max_length=45, unique=True)
     ip = models.CharField(max_length=15, unique=True)
     status = models.BooleanField(default=False)
-    temp = models.CharField(max_length=10)
-    humidity = models.CharField(max_length=10)
-    power = models.CharField(max_length=10)
+    sensor1 = models.CharField(max_length=100, null=True)
+    sensor2 = models.CharField(max_length=100, null=True)
+    sensor3 = models.CharField(max_length=100, null=True)
+    sensor4 = models.CharField(max_length=100, null=True)
+    power = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.hostname
@@ -46,22 +48,21 @@ class Detail(models.Model):
         primary_key=True,
         max_length=20
     )
-    status = models.CharField(max_length=10)
-    manufacturer = models.CharField(max_length=25)
-    up_time = models.CharField(max_length=25)
+    status = models.CharField(max_length=10, default='Up')
+    manufacturer = models.CharField(max_length=30)
+    up_time = models.CharField(max_length=255)
     interface_using = models.CharField(max_length=255)
-    sw_image = models.CharField(max_length=25)
-    sw_version = models.CharField(max_length=25)
-    last_reset = models.CharField(max_length=15)
+    sw_image = models.CharField(max_length=50)
+    sw_version = models.CharField(max_length=50)
+    last_reset = models.CharField(max_length=255)
     fan = models.CharField(max_length=5)
     temp = models.CharField(max_length=5)
     power = models.CharField(max_length=5)
-    ip = models.CharField(max_length=15)
-    serial_port = models.CharField(max_length=10)
+    ip = models.CharField(max_length=15, null=True)
+    serial_port = models.CharField(max_length=20)
 
 
 class Base_template(models.Model):
-    name = models.CharField(max_length=45)
     create_date = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=255)
     upload = models.FileField(blank=True, null=True)

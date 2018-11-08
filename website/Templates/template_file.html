@@ -35,67 +35,20 @@
                   <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
                     <div role="document" class="modal-dialog modal-lg">
                       <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 id="exampleModalLabel" class="modal-title">New file</h5>
+                        <div class="modal-header" style="padding: 5px; padding-right: 15px">
+                          <!--<h5 id="exampleModalLabel" class="modal-title">New file</h5>-->
                           <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                         </div>
-                        <div class="modal-body">
-                          <form action="" method="post" name="form1">
+                        <div class="modal-body" style="padding-top: 0px;">
+                          <form action="/template_file/" method="post" name="form1" enctype="multipart/form-data">
                             <br>
-                              <div class="form-group row">
-                              <label class="col-auto">Devices</label>
-                                  <div class="col-md-4">
-                                    <select name="device" id="device" onChange="selected(this.selectedIndex)">
-                                      <option value="0" selected>Select device..</option>
-                                      {% for i in dev %}
-                                          <option value="{{ i.id }}">{{ i }}</option>
-                                      {% endfor %}
-                                    </select>
-                                  </div>
-                                  <label class="col-auto">Model</label>
-                                  <div class="col-md-4">
-                                    <select name="model" id="model">
-                                      <option value="0" selected>Select course..</option>
-                                    </select>
-                                  </div>
-                              </div>
-                              <div class="line"></div>
-                              <div class="form-group row">
-                                  <label class="col-auto">Description</label>
-                                  <div class="col-md-11">
-                                    <textarea id="text-area-2" class="form-control" rows="7" placeholder="Placeholder text."></textarea>
-                                  </div>
-                              </div>
-                              <div class="line"></div>
-                              <div class="form-group">
-                                  <label>Choose file</label>
-                                  <input type="file" name="myFile"><br><br>
-                              </div>
+                              {% csrf_token %}
+                              {{ form.as_p }}
+                            <div class="modal-footer">
+                              <button type="submit" value="create" class="btn btn-blue">Add template file</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
                           </form>
-                        <script>
-                            var colleges=document.form1.device
-                            var models1=document.form1.model
-
-                            var model = new Array()
-
-                            {% autoescape off %}
-                                model = {{ model }}
-                            {% endautoescape %}
-
-                            function selected(collgrp){
-                                models1.options.length=0
-                                if(collgrp >= 0){
-
-                                    for(i=0; i<model[collgrp].length; i++){
-                                        models1.options[models1.options.length]=new Option(model[collgrp][i])
-                                    }
-                                }
-                            }
-                        </script>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-blue">Add template file</button>
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
                       </div>
                     </div>
@@ -111,45 +64,28 @@
                           <th>File name</th>
                           <th>Create Date</th>
                           <th>Description</th>
-                          <th>Devices</th>
                           <th>Model</th>
-                          <th></th>
-                          <th></th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>basic config</td>
-                          <td>29/8/61</td>
-                          <td>basic config for switch 2960 dscsdversdcccccccccccccccccc</td>
-                          <td>switch</td>
-                          <td>c2960</td>
-                          <td><a href="d1config.html"><button type="submit" class="btn btn-blue">Update</button></a></td>
-                          <td><a href="d1config.html"><button type="submit" class="btn btn-danger">Delete</button></a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td>xxx</td>
-                          <td></td>
-                          <td><a href="d1config.html"><button type="submit" class="btn btn-blue">Update</button></a></td>
-                          <td><a href="d1config.html"><button type="submit" class="btn btn-danger">Delete</button></a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                          <td>xxx</td>
-                          <td></td>
-                          <td><a href="d1config.html"><button type="submit" class="btn btn-blue">Update</button></a></td>
-                          <td><a href="d1config.html"><button type="submit" class="btn btn-danger">Delete</button></a></td>
-                        </tr>
+                        {% for i in file %}
+                            <tr>
+                              <th scope="row">{{ i.id }}</th>
+                              <td><a href="" onclick="myFunction({{ i.id }})">{{ i.upload }}</a></td>
+                                  <script>
+                                    function myFunction(x) {
+                                    window.open("/view_file/"+x, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=700,height=500");
+                                    }
+                                  </script>
+                              <td>{{ i.create_date }}</td>
+                              <td>{{ i.description }}</td>
+                              <td>{{ i.modID.name }}</td>
+                              <td><a href="/delete/{{ i.id }}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                            </tr>
+                        {% endfor %}
                       </tbody>
+
                     </table>
                   </div>
                 </div>

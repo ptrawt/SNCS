@@ -50,7 +50,7 @@
             </ul>
           <h5 class="sidenav-heading">Management</h5>
             <ul id="side-main-menu" class="side-menu list-unstyled ">
-                <li class="{% block active2 %}{% endblock %}"><a href="/d1config/0"> <i class="icon-form"></i>Configuration</a></li>
+                <li class="{% block active2 %}{% endblock %}"><a href="/config/0"> <i class="icon-form"></i>Configuration</a></li>
                 <li class="{% block active3 %}{% endblock %}"><a href="/template_file"> <i class="icon-list"></i>Template file</a></li>
                 <li class="{% block active4 %}{% endblock %}"><a href="/commandLine/0"> <i class="icon-screen"></i>Command line</a></li>
             </ul>
@@ -63,10 +63,10 @@
         <nav class="navbar">
           <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
-              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
+              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="/index" class="navbar-brand">
                   <div class="brand-text d-none d-md-inline-block"><span>Smart Network </span><strong class="text-primary"> Controller System</strong></div></a></div>
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge badge-warning">12</span></a>
+               <!-- <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge badge-warning">12</span></a>
                   <ul aria-labelledby="notifications" class="dropdown-menu">
                     <li><a rel="nofollow" href="#" class="dropdown-item"> 
                         <div class="notification d-flex justify-content-between">
@@ -90,8 +90,13 @@
                         </div></a></li>
                     <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-bell"></i>view all notifications                                            </strong></a></li>
                   </ul>
+                </li>-->
+                <li class="nav-item">
+                    <form action="{% url 'accounts:logout' %}" method="post">
+                        {% csrf_token %}
+                       <button type="submit" class="nav-link fa fa-sign-out btn-default">Logout</button>
+                    </form>
                 </li>
-                <li class="nav-item"><a href="login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>
@@ -109,7 +114,7 @@
               <p></p>
             </div>
             <div class="col-sm-6 text-right">
-              <p>Design by <a href="https://bootstrapious.com" class="external">Advanced Information Technology PCL. &copy; </a></p>
+              <p>Advanced Information Technology PCL. &copy;</p>
               <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
             </div>
           </div>
@@ -126,6 +131,7 @@
     <script src="/static/vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="/static/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/static/js/charts-home.js"></script>
+    <script src="/static/js/charts-custom.js"></script>
     <!-- Main File-->
     <script src="/static/js/front.js"></script>
   </body>

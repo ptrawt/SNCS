@@ -4,7 +4,7 @@ $(document).ready(function () {
     'use strict';
 
     // Main Template Color
-    var brandPrimary = '#33b35a';
+    var brandPrimary = '#FF703C';
 
 
     // ------------------------------------------------------- //
@@ -79,9 +79,9 @@ $(document).ready(function () {
     var pievalue = $('#pieChart').text();
     var output = pievalue.split(".");
     var len = (output.length)-1;
-    var devcie = output[0].split(',');
+    var devcie = output[0].split(",");
     devcie.splice(-1, 1)
-    var num_devcie = output[1].split(',');
+    var num_devcie = output[1].split(",");
     num_devcie.splice(-1, 1)
 
     var myPieChart = new Chart(PIECHART, {

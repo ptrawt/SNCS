@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/index">Management</a></li>
-                    <li class="breadcrumb-item active">Day 1 Configuration       </li>
+                    <li class="breadcrumb-item active">Day 1 Configuration</li>
                 </ul>
             </div>
         </div>
@@ -18,69 +18,118 @@
         <section class="forms">
         <div class="container-fluid">
             <!-- Page Header-->
-          <header>
-            <h1 class="h3 display">Configuration</h1>
-          </header>
+          <header style="padding-bottom: 0px"></header>
+          {% if sn == '0' %}
           <div class="container">
-              <div class="form-group">
+              <div class="col-lg-11" style="padding-left: 0px;margin-left: 45px;">
                   <div class="card">
                     <div class="card-header d-flex align-items-center">
                       <h4>Filter device</h4>
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                          <label class="col-sm-2">Controller</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in cont %}
-                                  <option>{{ i }}</option>
+                        <div class="form-group row" style="margin-top: 20px">
+                            <label style="margin-right: 25px; margin-left: 38px; padding-top: 10px;"><strong>Controller</strong></label>
+                          <div class="col-md-3" style="padding-left: 0px;">
+                            <select id="controller" class="form-control">
+                                <option value="">Select all...</option>
+                              {% for i in controller %}
+                                  <option value="{{ i }}">{{ i }}</option>
                               {% endfor %}
                             </select>
                           </div>
-                          <label class="col-sm-2">Devices</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in dev %}
-                                  <option>{{ i }}</option>
+                        <!--    <label style="padding-left: 40px; margin-right: 25px; padding-top: 10px;"><strong>Devices</strong></label>
+                          <div class="col-md-2" style="padding-left: 0px;">
+                            <select id="device" class="form-control">
+                                <option value="">Select...</option>
+                              {% for i in device %}
+                                  <option value="{{ i }}">{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>  -->
+                            <label style="padding-left: 40px; margin-right: 25px; padding-top: 10px;"><strong>Model device</strong></label>
+                          <div class="col-md-3" style="padding-left: 0px;">
+                            <select id="model" class="form-control">
+                                <option value="">Select all...</option>
+                              {% for i in model %}
+                                  <option value="{{ i }}">{{ i }}</option>
                               {% endfor %}
                             </select>
                           </div>
+                        </div>
+                        <div class="line" style="margin-bottom: 0px;"></div>
+                    </div>
+
+                    <div class="form-group row" style="margin-top: 20px">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+                        <div class="container col-lg-11" style="padding-left: 0px">
+                            <label style="margin-bottom: 10px"><strong>Hostname or Serial number.</strong></label>
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                            <br>
+                            <table class="table table-bordered table-striped">
+                              <thead>
+                                <tr>
+                                    <th>Hostname</th>
+                                    <th>Serial number</th>
+                                    <!--<th>Device</th>-->
+                                    <th>Model</th>
+                                    <th>Controller</th>
+                                </tr>
+                              </thead>
+                              <tbody id="myTable">
+                                {% for i in net_device %}
+                                    <tr>
+                                        <td><a href="/config/{{ i.ser_num }}">{{ i.hostname }}</a></td>
+                                        <td>{{ i.ser_num }}</td>
+                                        <!--<td>{{ i.devID.name }}</td>-->
+                                        <td>{{ i.modID.name }}</td>
+                                        <td>{{ i.con_id.hostname }}</td>
+                                    </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
                         </div>
 
-                        <div class="form-group row">
-                          <label class="col-sm-2">Model device</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in mod %}
-                                  <option>{{ i }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="form-group row">
-                          <div class="line"></div>
-                          <label class="col-sm-2">Serial number</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in sn %}
-                                  <option>{{ i }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                          <label class="col-sm-2">or Hostname</label>
-                          <div class="col-md-3">
-                            <select name="account" class="form-control">
-                              {% for i in host %}
-                                  <option>{{ i }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                $("#controller").on("change", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                            $(document).ready(function(){
+                                $("#device").on("change", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                            $(document).ready(function(){
+                                $("#model").on("change", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                            $(document).ready(function(){
+                                $("#myInput").on("keyup", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function() {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                   </div>
               </div>
-          </div><br>
+          </div>
+          {% else %}
           <div class="row">
             <div class="col-lg-12">
               <div class="card">
@@ -88,23 +137,15 @@
                   <h4>Add script or template file</h4>
                 </div>
                 <div class="card-body">
-                  <form action="d1config.html" class="form-horizontal">
-                    <div class="form-group row">
-                      <label class="col-sm-2 form-control-label">Script input</label>
-                      <div class="col-md-9">
-                        <textarea id="text-area-2" class="form-control" rows="20" placeholder="text."></textarea>
-                      </div>
+                  <form method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="form-group row" style="margin-top: 20px">
+                      {% csrf_token %}
+                      {{ form }}
                     </div>
                     <div class="line"></div>
                     <div class="form-group row">
-                      <label class="col-sm-2 form-control-label">or Choose template file</label>
-                      <input type="file" name="myFile"><br><br>
-                    </div>
-                    <div class="line"></div>
-                    <div class="form-group row">
-                      <div class="col-sm-4 offset-sm-5">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <a href="/index"><button type="submit" class="btn btn-secondary">Cancel</button></a>
+                      <div class="offset-sm-5">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                     </div>
                   </form>
@@ -112,6 +153,7 @@
               </div>
             </div>
           </div>
+          {% endif %}
         </div>
       </section>
     {% endblock %}

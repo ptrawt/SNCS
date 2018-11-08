@@ -639,7 +639,7 @@ nav.navbar a.menu-btn:hover {
 
 .dashboard-counts .count-title i {
   font-size: 1.5em;
-  color: #33b35a;
+  color: #f05423;
 }
 
 .dashboard-counts .icon {
@@ -2959,4 +2959,14 @@ a > code {
     margin-right: 15px;
     margin-left: 15px;
   }
+  .row{
+    margin-left:0px !important;
+    margin-right:0px !important;
+  }
+}
+
+.data_out{
+  background: black;
+  color: white;
+  font-family: Monaco, Courier;
 }

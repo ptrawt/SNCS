@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static", '/website/static')]
+
+MEDIA_URL = '/data/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "website/data")  # 'data' is my media folder
