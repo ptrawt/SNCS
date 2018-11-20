@@ -12,7 +12,6 @@ class Controller(models.Model):
     sensor2 = models.CharField(max_length=100, null=True)
     sensor3 = models.CharField(max_length=100, null=True)
     sensor4 = models.CharField(max_length=100, null=True)
-    power = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.hostname
@@ -73,4 +72,4 @@ class Management(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
     ser_num = models.ForeignKey(Network_devices, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    desc = models.CharField(max_length=255)
+    new_config = models.CharField(max_length=2048, null=True)

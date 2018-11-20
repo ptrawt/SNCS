@@ -1655,22 +1655,21 @@ model</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="376" parent="246" name="desc">
+    <column id="376" parent="246" name="ser_num_id">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="377" parent="246" name="ser_num_id">
-      <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="378" parent="246" name="userID_id">
-      <Position>5</Position>
+    <column id="377" parent="246" name="userID_id">
+      <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="378" parent="246" name="new_config">
+      <Position>5</Position>
+      <DataType>varchar(2048)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="379" parent="246" name="website_management_ser_num_id_8db8d207">

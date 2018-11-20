@@ -30,6 +30,25 @@ class UploadBasetemp(ModelForm):
 
 
 class addConfig(forms.Form):
+    console_pass = forms.CharField(
+        label='Console Password',
+        widget=forms.TextInput(attrs={
+            'class': "col-md-10",
+            'style': "margin-left: 30px; margin-right: 30px; margin-bottom: 20px; padding-left: 5px",
+            'type': 'password'
+        }),
+        required=False,
+
+    )
+    enable_pass = forms.CharField(
+        label='Enable Password',
+        widget=forms.TextInput(attrs={
+            'class': "col-md-10",
+            'style': "margin-left: 40px; margin-right: 30px; margin-bottom: 20px; padding-left: 5px",
+            'type': 'password'
+        }),
+        required=False
+    )
     script = forms.CharField(
         widget=forms.Textarea(attrs={
             'class': "col-md-11",

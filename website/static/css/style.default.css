@@ -219,7 +219,7 @@ nav.navbar .nav-menu {
 }
 
 nav.navbar .dropdown-menu {
-  width: 320px;
+/*  width: 200px; */
   right: 0;
   left: auto;
   float: left;
@@ -1478,8 +1478,8 @@ button {
 
 .login-page form,
 .register-page form {
-  margin: 2rem auto 1rem;
-  max-width: 300px;
+  margin: 2rem 3rem;
+  max-width: 500px;
 }
 
 .login-page a.forgot-pass,

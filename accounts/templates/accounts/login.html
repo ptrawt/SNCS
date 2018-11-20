@@ -38,7 +38,8 @@
             <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>-->
             <form action="{% url 'accounts:login' %}" method="post">
                 {% csrf_token %}
-                {{ form }}
+                <label style="margin-right: 15px;margin-bottom: 20px;">Username:</label><label>{{ form.username }}</label><br>
+                <label style="margin-right: 15px;margin-bottom: 20px;">Password:</label><label>{{ form.password }}</label><br>
                 {% if request.GET.next %}
                     <input type="hidden" name="next" value="{{ request.GET.next }}">
                 {% endif %}
@@ -73,7 +74,7 @@
 
                 })
             </script>  
-              <a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href="../../../website/Templates/account/register.html" class="signup">Signup</a>
+              <small>Do not have an account? </small><a href="{% url 'accounts:signup' %}" class="signup">Signup</a>
           </div>
           <div class="copyrights text-center">
             <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>

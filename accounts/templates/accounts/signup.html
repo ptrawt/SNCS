@@ -36,31 +36,22 @@
           <div class="form-inner">
             <div class="logo text-uppercase"><span>Smart Network</span><strong class="text-primary"> Controller System</strong></div>
             <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>-->
-            <form action="{% url 'accounts:signup' %}" method="post">
-                {% csrf_token %}
-                {{ form }}
-              <!--<div class="form-group-material">
-                <input id="register-username" type="text" name="registerUsername" required class="input-material">
-                <label for="register-username" class="label-material">Username</label>
-              </div>
-              <div class="form-group-material">
-                <input id="register-email" type="email" name="registerEmail" required class="input-material">
-                <label for="register-email" class="label-material">Email Address      </label>
-              </div>
-              <div class="form-group-material">
-                <input id="register-passowrd" type="password" name="registerPassword" required class="input-material">
-                <label for="register-passowrd" class="label-material">Password        </label>
-              </div>
-              <div class="terms-conditions d-flex justify-content-center">
-                <input id="license" type="checkbox" class="form-control-custom">
-                <label for="license">Agree the terms and policy</label>
-              </div>-->
-              <input type="submit" value="Register" class="btn btn-primary">
-            </form><small>Already have an account? </small><a href="login.html" class="signup">Login</a>
-          </div>
-          <div class="copyrights text-center">
-            <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
-            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            <form action="{% url 'accounts:signup' %}" method="post" style="text-align: left">
+              {% csrf_token %}
+              <label style="margin-right: 20px">Username:</label><label>   {{ form.username }}</label>
+                <span class="text-small text-gray help-block-none" style="margin-bottom: 10px; margin-left: 2%">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+              <label style="margin-right: 20px">Password:</label><label>   {{ form.password1 }}</label>
+              <ul>
+                  <li class="text-small text-gray help-block-none">Your password can't be too similar to your other personal information.</li>
+                  <li class="text-small text-gray help-block-none">Your password must contain at least 8 characters.</li>
+                  <li class="text-small text-gray help-block-none">Your password can't be a commonly used password.</li>
+                  <li class="text-small text-gray help-block-none">Your password can't be entirely numeric.</li>
+              </ul>
+              <label style="margin-right: 20px">Password confirmation:</label><label>   {{ form.password2 }}</label>
+              <label class="text-small text-gray help-block-none" style="margin-left: 2%">Enter the same password as before, for verification.</label>
+              <br>
+              <input type="submit" value="Register" class="btn btn-primary" style="margin-left: 40%;margin-top: 3%;">
+            </form><small>Already have an account? </small><a href="{% url 'accounts:login' %}" class="signup">Login</a>
           </div>
         </div>
       </div>

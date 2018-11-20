@@ -14,7 +14,7 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-user"></i></div>
-                <div class="name"><strong class="text-uppercase">Controller</strong><span>Last 5 minutes</span>
+                <div class="name"><strong class="text-uppercase">Controller</strong><span id="time1"></span>
                   <div class="count-number">{{ rack_count }}</div>
                 </div>
               </div>
@@ -23,7 +23,7 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-padnote"></i></div>
-                <div class="name"><strong class="text-uppercase">All Devices</strong><span>Last 5 minutes</span>
+                <div class="name"><strong class="text-uppercase">All Devices</strong><span id="time2"></span>
                   <div class="count-number">{{ devices_count }}</div>
                 </div>
               </div>
@@ -32,7 +32,7 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-check"></i></div>
-                <div class="name"><strong class="text-uppercase">Active</strong><span>Last 5 minutes</span>
+                <div class="name"><strong class="text-uppercase">Active</strong><span id="time3"></span>
                   <div class="count-number">{{ sta_up }}</div>
                 </div>
               </div>
@@ -41,7 +41,7 @@
             <div class="col-xl-3 col-md-4 col-6">
               <div class="wrapper count-title d-flex">
                 <div class="icon"><i class="icon-bill"></i></div>
-                <div class="name"><strong class="text-uppercase">Non-active</strong><span>Last 5 minutes</span>
+                <div class="name"><strong class="text-uppercase">Non-active</strong><span id="time4"></span>
                   <div class="count-number">{{ sta_down }}</div>
                 </div>
               </div>
@@ -53,9 +53,9 @@
     <section class="dashboard-header section-padding">
         <div class="container-fluid">
           <div class="row d-flex align-items-md-stretch">
-          	<div class="col-xl-2 col-md-6"></div>
+          	<!--<div class="col-xl-2 col-md-6"></div>-->
           	<!-- To Do List-->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3" style="margin-left: 12%;">
               <div class="card to-do">
                 <div id="new-updates" class="card updates recent-updated">
                     <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
@@ -64,20 +64,51 @@
                       <a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true"
                       aria-controls="updates-box"><i class="fa fa-angle-down"></i></a>
                     </div>
-                    <div id="updates-box" role="tabpanel" class="collapse">
+                    <div id="updates-box" role="tabpanel" class="collapse show">
                         <!-- Item-->
                         {% for i in var %}
                             <li><a href="/rack_detail/{{ i.ip }}">{{ i.hostname }}</a></li>
                         {% endfor %}
                     </div>
-              </div>
-
+                </div>
               </div>
             </div>
 
-            <div class="col-xl-1 col-md-6"></div>
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h2 class="h5 display">Using configuration</h2>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table" rules="rows=1">
+                      <thead>
+                        <tr>
+                          <th>Username</th>
+                          <th>Controller</th>
+                          <th>Device</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in using_config %}
+                            <tr>
+                            {% for j in i %}
+                                  <td>{{ j }}</td>
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+            <!--<div class="col-xl-1 col-md-6"></div>
 
-            <!-- Pie Chart-->
+             Pie Chart
             <div class="col-lg-4 col-md-6">
               <div class="card project-progress">
                 <h2 class="display h4">Type of all devices</h2>
@@ -85,8 +116,6 @@
                   <canvas id="pieChart"  width="300" height="300">{{ model }}.{{ count_model }}</canvas>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-    </section>
+            </div>-->
+
     {% endblock %}

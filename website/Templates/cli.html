@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html style="background: black">
+	<head>
+		<meta charset="utf-8"/>
+		<title>CLI</title>
+		<script src="/static/js/terminal.js"></script>
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome CSS-->
+        <link rel="stylesheet" href="/static/vendor/font-awesome/css/font-awesome.min.css">
+        <!-- Fontastic Custom icon font-->
+        <link rel="stylesheet" href="/static/css/fontastic.css">
+        <!-- Google fonts - Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+        <!-- jQuery Circle-->
+        <link rel="stylesheet" href="/static/css/grasp_mobile_progress_circle-1.0.0.min.css">
+        <!-- Custom Scrollbar-->
+        <link rel="stylesheet" href="/static/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+        <!-- theme stylesheet-->
+        <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+        <!-- Custom stylesheet - for your changes-->
+        <link rel="stylesheet" href="/static/css/custom.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body onbeforeunload="return myFunction()">
+
+        <script>
+            function myFunction() {
+                $.ajax({
+                    type: 'POST',
+                    url: "/cli_success/{{ sn }}/",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    }
+                })
+                return "You want to exit ?";
+            }
+        </script>
+		<script>
+			var t1 = new Terminal()
+			t1.setWidth('100%')
+			document.body.appendChild(t1.html)
+			t1.print('Hello, world!')
+			loop()
+
+			function loop(){
+				t1.input('', function (input) {
+					if (input != 'end') {
+                        $.ajax({
+                            type: 'POST',
+                            url: "/cli/{{ sn }}/{{ user.username }}/",
+                            dataType: "json",
+                            data: {
+                                command: input,
+                                csrfmiddlewaretoken: '{{ csrf_token }}',
+                            },
+
+                            success: function (json) {
+                                t1.print(json.message)
+                            }
+                        })
+                        loop()
+                    }
+				})
+			}
+		</script>
+
+	</body>
+</html>

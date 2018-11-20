@@ -72,7 +72,6 @@
                                 <tr>
                                     <th>Hostname</th>
                                     <th>Serial number</th>
-                                    <!--<th>Device</th>-->
                                     <th>Model</th>
                                     <th>Controller</th>
                                 </tr>
@@ -80,9 +79,12 @@
                               <tbody id="myTable">
                                 {% for i in net_device %}
                                     <tr>
-                                        <td><a href="/config/{{ i.ser_num }}">{{ i.hostname }}</a></td>
+                                        {% if i.ser_num in user_use %}
+                                            <td>{{ i.hostname }}</td>
+                                        {% else %}
+                                            <td><a href="/config/{{ i.ser_num }}/{{ user.username }}/">{{ i.hostname }}</a></td>
+                                        {% endif %}
                                         <td>{{ i.ser_num }}</td>
-                                        <!--<td>{{ i.devID.name }}</td>-->
                                         <td>{{ i.modID.name }}</td>
                                         <td>{{ i.con_id.hostname }}</td>
                                     </tr>

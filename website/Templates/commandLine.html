@@ -71,7 +71,17 @@
                               <tbody id="myTable">
                                 {% for i in net_device %}
                                     <tr>
-                                        <td><a href="/commandLine/{{ i.ser_num }}/">{{ i.hostname }}</a></td>
+                                        {% if i.ser_num in user_use %}
+                                        <td>{{ i.hostname }}</td>
+                                        {% else %}
+                                        <td><a href="" onclick="myFunction('{{ i.ser_num }}','{{ user.username }}')">{{ i.hostname }}</a></td>
+                                        <script>
+                                            function myFunction(x, y) {
+                                                window.open("/cli/"+x+'/'+y,
+                                                    "_blank", "resizable=yes,top=200,left=500,width=700,height=450");
+                                            }
+                                        </script>
+                                        {% endif %}
                                         <td>{{ i.ser_num }}</td>
                                         <td>{{ i.modID.name }}</td>
                                         <td>{{ i.con_id.hostname }}</td>
@@ -111,7 +121,7 @@
                   </div>
               </div>
           </div>
-        {% else %}
+<!--        {% else %}
           <div align="center">
             <div class="col-lg-7" style="padding-left: 0px;">
               <div class="card">
@@ -141,7 +151,7 @@
 
 	    	                    $.ajax({
                                     type: 'POST',
-                                    url: "/commandLine/{{ sn }}/",
+                                    url: "/commandLine/{{ sn }}/{{ user.username }}/",
                                     dataType: "json",
                                     data: {
                                         command: $('#myInput').val(),
@@ -150,7 +160,7 @@
 
                                     success: function (json) {
                                         $('#myTextarea').html(data.value+'\n'+inp+'\n'+json.message);
-
+                                        data.scrollTop = data.scrollHeight;
                                     }
                                 })
                                 document.getElementById("myInput").click();
@@ -159,8 +169,13 @@
                     </script>
                 </div>
               </div>
+              <div class="form-group row" style="margin-top: 3%">
+                  <div class="offset-sm-5">
+                      <a href="/commandLine/0/{{ user.username }}"><button type="button" class="btn btn-primary">Complete</button></a>
+                  </div>
+              </div>
             </div>
-          </div>
+          </div> -->
         {% endif %}
         </div>
       </section>

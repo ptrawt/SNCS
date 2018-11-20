@@ -15,23 +15,23 @@
     <section class="forms">
         <div class="container-fluid">
           <!-- Page Header-->
-            <header>
+            <header style="padding-bottom: 15px;">
                 <h1 class="h3 display">Controller</h1>
             </header>
             <div class="row">
-                <div class="col-lg-4" style="padding-left: 0px;">
+                <div class="col-lg-3" style="padding-left: 0px;">
                   <div class="card">
                     <div class="card-header d-flex align-items-center">
                       <h5>Rack Detail</h5>
                     </div>
                     <div class="card-body">
-                        <ul>
+                        <ul style="margin-top: 1rem;">
                             <span><strong>Hostname : </strong>{{ controller }}</span><br><br>
                             <span><strong>IP Address : </strong>{{ ip_rpi }}</span>
                         </ul>
-                        <div class="line"></div>
+                        <div class="line" style="margin-bottom: 20px"></div>
                         <ul>
-                            <span><strong>Network device connected</strong></span><br>
+                            <span style="margin-bottom: 1rem;"><strong>Network device connected</strong></span><br>
                             {% for i in sn_nd %}
                                 <ul>
                                     <li><a href="/node_detail/{{ ip_rpi }}/{{ i.ser_num }}">{{ i.hostname }}</a></li>
@@ -44,24 +44,30 @@
                 <div class="col-lg-5">
                   <div class="card line-chart-example">
                     <div class="card-header d-flex align-items-center">
-                      <h4>Bar Chart Example</h4>
+                      <h4>Temperature Chart</h4>
                     </div>
                     <div class="card-body">
                       <canvas id="barChartExample">{{ temp }}/{{ humidity }}</canvas>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
+                  <div class="card line-chart-example">
+                      <img src="/static/img/rack.png">
+                  </div>
+                </div>
+
+                <!--<div class="col-lg-3">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h5>Type of device connected</h5>
                         </div>
-                        <!-- Pie Chart-->
+                        <!-- Pie Chart
                         <div class="pie-chart card-body">
                             <canvas id="pieChart" width="300" height="300">{{ dev }}.{{ count_dev }}</canvas>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>

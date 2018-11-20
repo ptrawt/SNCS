@@ -10,3 +10,14 @@ interface fa 0/2
 description ait555
 no sh
 !
+exit
+!
+line console 0
+password ait-admin
+login
+!
+exit
+!
+enable password ait-admin
+!
+end

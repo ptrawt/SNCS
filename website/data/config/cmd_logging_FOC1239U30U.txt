@@ -1,8 +1,0 @@
-Sw1#
-Enter configuration commands
-Sw1#
-hostname Sw1
-Sw1#
-Enter configuration commands
-Sw1(config-if)#
-Sw1#
