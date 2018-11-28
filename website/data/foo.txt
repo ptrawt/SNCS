@@ -1,23 +1,17 @@
 conf t
 !
-hostname AIT
-!
 interface fa 0/1
-description ait555
+description ait-test
 no sh
 !
 interface fa 0/2
-description ait555
+description ait-test2
 no sh
 !
 exit
 !
+enable pass cisco
+!
 line console 0
-password ait-admin
+pass cisco
 login
-!
-exit
-!
-enable password ait-admin
-!
-end

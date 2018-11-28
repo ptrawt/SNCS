@@ -35,6 +35,8 @@ class Model(models.Model):
 class Network_devices(models.Model):
     ser_num = models.CharField(primary_key=True, max_length=20)
     hostname = models.CharField(max_length=255, unique=True)
+    enable_pass = models.CharField(max_length=100, null=True)
+    console_pass = models.CharField(max_length=100, null=True)
     con_id = models.ForeignKey(Controller, on_delete=models.CASCADE)
     devID = models.ForeignKey(Devices, on_delete=models.CASCADE)
     modID = models.ForeignKey(Model, on_delete=models.CASCADE)

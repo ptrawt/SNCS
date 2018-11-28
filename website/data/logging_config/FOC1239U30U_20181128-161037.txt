@@ -1,0 +1,277 @@
+
+
+Sw1#terminal len 0
+
+Sw1#en
+
+Sw1#sh run
+
+
+
+*Mar  1 00:05:36.618: %SYS-5-CONFIG_I: Configured from console by console
+
+Building configuration...
+
+
+
+Current configuration : 2964 bytes
+
+!
+
+version 12.2
+
+no service pad
+
+service timestamps debug datetime msec
+
+service timestamps log datetime msec
+
+no service password-encryption
+
+!
+
+hostname Sw1
+
+!
+
+boot-start-marker
+
+boot-end-marker
+
+!
+
+enable password cisco
+
+!
+
+!
+
+!
+
+no aaa new-model
+
+system mtu routing 1500
+
+!
+
+!
+
+!
+
+!
+
+crypto pki trustpoint TP-self-signed-2870242048
+
+ enrollment selfsigned
+
+ subject-name cn=IOS-Self-Signed-Certificate-2870242048
+
+ revocation-check none
+
+ rsakeypair TP-self-signed-2870242048
+
+!
+
+!
+
+crypto pki certificate chain TP-self-signed-2870242048
+
+ certificate self-signed 01
+
+  3082023C 308201A5 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+
+  69666963 6174652D 32383730 32343230 3438301E 170D3933 30333031 30303031 
+
+  34335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 38373032 
+
+  34323034 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+
+  8100BBD5 BDBC12F5 79251D59 5E31B40E 80AEBBA9 6A51910B 3C922CF2 8131B029 
+
+  2CC39F5F B4E0B6E7 D132FD3F 873B1BDB FC2BEAE8 200E6E02 0103C0C7 D485DB07 
+
+  BA9FDE04 A49B7A71 7C841D05 B1E28BEB 99472781 04AA5D46 6F111E42 C74EE02E 
+
+  83C3F2F1 219BA3C0 BA6CA657 1AF2D153 8320C46C 24CC4282 B763494E 3CC1D5FB 
+
+  9A3F0203 010001A3 64306230 0F060355 1D130101 FF040530 030101FF 300F0603 
+
+  551D1104 08300682 04537731 2E301F06 03551D23 04183016 8014824D 64193104 
+
+  B0EF423C 32CB134E 47DB3FCA 945D301D 0603551D 0E041604 14824D64 193104B0 
+
+  EF423C32 CB134E47 DB3FCA94 5D300D06 092A8648 86F70D01 01040500 03818100 
+
+  604719E5 FA9ACBAB BC388AA5 C68DA5A1 EB607C79 6E29BA1D 32354EBD 330857B9 
+
+  F049ADD5 BA695C51 F3DB9402 95D1D067 955179A3 C4AF6FE1 F720E7FC 4E93FBB3 
+
+  AECEBC29 6B064BBA 710AA88F B82C4FBF DC03CE50 8F2E6C3F EEB6165A 512C865F 
+
+  9A92C780 B4C7DE5E 3F8E0417 9C107F82 F0AC950F 3ABF7F22 2DDCDBAB 4EABDAF9
+
+  quit
+
+!
+
+!
+
+!
+
+spanning-tree mode pvst
+
+spanning-tree extend system-id
+
+!
+
+vlan internal allocation policy ascending
+
+!
+
+!
+
+!
+
+interface FastEthernet0/1
+
+ description ait-test
+
+!
+
+interface FastEthernet0/2
+
+ description ait-test2
+
+!
+
+interface FastEthernet0/3
+
+!
+
+interface FastEthernet0/4
+
+!
+
+interface FastEthernet0/5
+
+!
+
+interface FastEthernet0/6
+
+!
+
+interface FastEthernet0/7
+
+!
+
+interface FastEthernet0/8
+
+!
+
+interface FastEthernet0/9
+
+!
+
+interface FastEthernet0/10
+
+!
+
+interface FastEthernet0/11
+
+!
+
+interface FastEthernet0/12
+
+!
+
+interface FastEthernet0/13
+
+!
+
+interface FastEthernet0/14
+
+!
+
+interface FastEthernet0/15
+
+!
+
+interface FastEthernet0/16
+
+!
+
+interface FastEthernet0/17
+
+!
+
+interface FastEthernet0/18
+
+!
+
+interface FastEthernet0/19
+
+!
+
+interface FastEthernet0/20
+
+!
+
+interface FastEthernet0/21
+
+!
+
+interface FastEthernet0/22
+
+!
+
+interface FastEthernet0/23
+
+!
+
+interface FastEthernet0/24
+
+!
+
+interface GigabitEthernet0/1
+
+!
+
+interface GigabitEthernet0/2
+
+!
+
+interface Vlan1
+
+ no ip address
+
+!
+
+ip http server
+
+ip http secure-server
+
+vstack
+
+!
+
+line con 0
+
+ password cisco
+
+ login
+
+line vty 0 4
+
+ login
+
+line vty 5 15
+
+ login
+
+!
+
+Connect close...

@@ -95,12 +95,20 @@ def uploaded_file(f, port, console_pass, enable_pass):
     return data.stdout
 
 
-def uploaded_file2(f, port, console_pass, enable_pass):
+def uploaded_file2(f, port, console_pass, enable_pass, device):
     inp = '1:' + port + ':' + console_pass + ':' + enable_pass + ':'
     for chunk in f.chunks():
         chunk2 = chunk.decode()
         for i in chunk2.split('\r\n'):
             inp += i + ','
+            if 'pass' in i:
+                if 'en' in i:
+                    i = i.split(' ')
+                    device.console_pass = i[len(i) - 1]
+                else:
+                    i = i.split(' ')
+                    device.enable_pass = i[len(i) - 1]
+    device.save()
 
     return inp
 
@@ -198,7 +206,8 @@ def d1config2(request, sn, username):
             script = form.cleaned_data['script']
             p_ser = port.get(ser_num=sn)
             if script == '':
-                inp = uploaded_file2(request.FILES['upload'], p_ser.serial_port, console_pass, enable_pass)
+                inp = uploaded_file2(request.FILES['upload'], p_ser.serial_port, console_pass, enable_pass
+                                     , devices.get(ser_num=sn))
                 data = send_receive(devices.get(ser_num=sn).con_id.ip, 30002, inp)
                 for line in data.split(','):
                     data_write += line + '\r\n'
@@ -211,8 +220,18 @@ def d1config2(request, sn, username):
                 return render(request, 'config_success.html', {'var': sett})
             else:
                 inp = '1:' + p_ser.serial_port + ':' + console_pass + ':' + enable_pass + ':'
+                nd = devices.get(ser_num=sn)
                 for i in script.split('\r\n'):
                     inp += i + ','
+                    if 'pass' in i:
+                        if 'en' in i:
+                            i = i.split(' ')
+                            nd.console_pass = i[len(i) - 1]
+                        else:
+                            i = i.split(' ')
+                            nd.enable_pass = i[len(i) - 1]
+                nd.save()
+
                 data = send_receive(devices.get(ser_num=sn).con_id.ip, 30002, inp)
                 for line in data.split(','):
                     data_write += line+'\r\n'
@@ -307,36 +326,57 @@ def cmd(request, sn, user):
 def cli(request, sn, username):
     devices = Network_devices.objects.all()
     port = Detail.objects.all()
-
+    serial_port = port.get(ser_num=sn).serial_port
+    ser_port_num = int(''.join([n for n in serial_port if n.isdigit()]))
     global user_use_dic
     user_use_dic[sn] = username
-    # print(user_use_dic)
     global count_cli
     global sock_cli
     if count_cli == 0:
-        sock_cli = connection_socket(devices.get(ser_num=sn).con_id.ip, 30002)
+        sock_cli = connection_socket(devices.get(ser_num=sn).con_id.ip, 30003)
     else:
         pass
     count_cli += 1
 
     if request.method == 'POST':
         command = request.POST.get("command", "")
-        print(command)
         port = port.get(ser_num=sn)
+        inp = port.serial_port + ':' + command
+        nd = devices.get(ser_num=sn)
+        if 'pass' in command:
+            if 'en' in command:
+                en_pss = command.split(' ')
+                nd.console_pass = en_pss[len(en_pss) - 1]
+            else:
+                con_pss = command.split(' ')
+                nd.enable_pass = con_pss[len(con_pss) - 1]
+        nd.save()
 
-        if command == 'end':
-            sock_cli.send(b'end:')
-            sock_cli.close()
-            count_cli == 0
+        if command == 'stop':
+            # inp = 'end:'
+            # sock_cli.send(inp.encode())
+            user_use_dic.pop(sn)
+            # count_cli = 0
         else:
-            inp = '2:' + port.serial_port + ':' + command
-            sock_cli.send(inp.encode())
+            try:
+                sock_cli.send(inp.encode())
+                reply = sock_cli.recv(2048)
+            except:
+                data_out = 'insert command again.'
+            else:
+                data = reply.decode()
+                data = data.split('\n')
+                del data[0]
+                data_out = ''
+                for d in data:
+                    data_out += d + '\n'
+        # print(data.encode())
     #     data_out = data_out.split('\n')
-    #     # print(data_out)
+    #     print(data_out)
     #
     #     del data_out[0]
-    #     # print(data_out)
-    #     # print(len(data_out))
+    #     print(data_out)
+    #     print(len(data_out))
     #     output = ''
     #     count = 0
     #     for i in data_out:
@@ -358,7 +398,7 @@ def cli(request, sn, username):
         response_data = {}
         try:
             response_data['result'] = 'Input success.'
-            response_data['message'] = '>>' + command
+            response_data['message'] = data_out
         except:
             response_data['result'] = 'Oh No'
             response_data['message'] = 'subprocess is not run'
@@ -417,11 +457,16 @@ def rack_detail(request, ip):
 def node_detail(request, ip, id):
     detail = Detail.objects.get(ser_num=id)
     device = Network_devices.objects.get(ser_num=id)
+    lis_user = []
+    for u in user_use_dic.keys():
+        lis_user.append(u)
+
     context = {
         'var1': id,
         'ip_rpi': ip,
         'detail': detail,
-        'device': device
+        'device': device,
+        'user_use': lis_user
     }
     return render(request, 'node_detail.html', context)
 
@@ -471,7 +516,7 @@ def view_base_file(request, id, files):
         file_name = config_f_name.new_config
     else:
         file = Base_template.objects.get(id=id)
-        fo = open(media_url + file.upload.name, "r")
+        fo = open(media_url + '/' + file.upload.name, "r")
         txt = fo.read()
         txt = txt.split('\n')
         file_name = file.upload.name

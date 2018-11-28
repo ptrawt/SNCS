@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends 'base_template.html' %}
 
+{% block title %}Node details | Smart Network Controller System{% endblock %}
 {% block content %}
     <!-- Breadcrumb-->
         <div class="breadcrumb-holder">
@@ -136,7 +137,7 @@
               </div>
             </div>
           </div>
-          {% if detail.status == 'Up' %}
+          {% if detail.status == 'Up' and var1 not in user_use%}
           <header>
             <h1 class="h3 display">Configuration</h1>
           </header>
@@ -145,8 +146,14 @@
                     <div class="card-body">
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-4">
-                            <a href="/config/{{ var1 }}/{{ user.username }}"><button type="submit" class="btn btn-primary">Day 1 Configuration</button></a>
-                            <a href="/commandLine/{{ var1 }}/{{ user.username }}"><button type="submit" class="btn btn-secondary">Command line</button></a>
+                            <a href="/config/{{ var1 }}/{{ user.username }}"><button type="submit" class="btn btn-primary">Configuration</button></a>
+                            <a href="" onclick="myFunction('{{ var1 }}','{{ user.username }}')"><button type="submit" class="btn btn-secondary">Command line</button></a>
+                            <script>
+                                function myFunction(x, y) {
+                                    window.open("/cli/"+x+'/'+y,
+                                        "_blank", "resizable=yes,top=200,left=500,width=700,height=450");
+                                }
+                            </script>
                           </div>
                         </div>
                     </div>

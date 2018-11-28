@@ -28,8 +28,9 @@
             function myFunction() {
                 $.ajax({
                     type: 'POST',
-                    url: "/cli_success/{{ sn }}/",
+                    url: "/cli/{{ sn }}/{{ user.username }}/",
                     data: {
+                        command: 'stop',
                         csrfmiddlewaretoken: '{{ csrf_token }}'
                     }
                 })
@@ -40,27 +41,30 @@
 			var t1 = new Terminal()
 			t1.setWidth('100%')
 			document.body.appendChild(t1.html)
-			t1.print('Hello, world!')
+			t1.print('Please enter.')
 			loop()
 
 			function loop(){
 				t1.input('', function (input) {
-					if (input != 'end') {
-                        $.ajax({
-                            type: 'POST',
-                            url: "/cli/{{ sn }}/{{ user.username }}/",
-                            dataType: "json",
-                            data: {
-                                command: input,
-                                csrfmiddlewaretoken: '{{ csrf_token }}',
-                            },
+                    $.ajax({
+                        type: 'POST',
+                        url: "/cli/{{ sn }}/{{ user.username }}/",
+                        dataType: "json",
+                        data: {
+                            command: input,
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                        },
 
-                            success: function (json) {
-                                t1.print(json.message)
+                        success: function (json) {
+                            var mesg = json.message.split('\n')
+                            for (var i in mesg) {
+                                t1.print(mesg[i])
                             }
-                        })
-                        loop()
-                    }
+                            {#t1.print(json.message)#}
+
+                        }
+                    })
+                    loop()
 				})
 			}
 		</script>

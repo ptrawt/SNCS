@@ -1,18 +1,18 @@
 
 
-AIT2#terminal len 0
+Switch#terminal len 0
 
-AIT2#en
+Switch#en
 
-AIT2#sh ru
-
-*Mar  4 22:30:10.154: %SYS-5-CONFIG_I: Configured from console by consolen
+Switch#sh run
 
 Building configuration...
 
 
 
-Current configuration : 1374 bytes
+*Mar  1 00:06:27.629: %SYS-5-CONFIG_I: Configured from console by console
+
+Current configuration : 1381 bytes
 
 !
 
@@ -28,7 +28,7 @@ no service password-encryption
 
 !
 
-hostname AIT2
+hostname Switch
 
 !
 
@@ -82,13 +82,13 @@ vlan internal allocation policy ascending
 
 interface FastEthernet0/1
 
- description ait555
+ description ait-test
 
 !
 
 interface FastEthernet0/2
 
- description ait555
+ description ait-test2
 
 !
 
@@ -224,4 +224,4 @@ line vty 5 15
 
 !
 
-
+Connect close...
